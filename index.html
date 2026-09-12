@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Planilha de Trabalhos</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="authScreen" class="auth-screen">
+    <div class="auth-card">
+      <div class="brand-mark">PT</div>
+      <h1>Planilha de Trabalhos</h1>
+      <p>Entre na sua conta para acessar seus lançamentos.</p>
+      <form id="authForm">
+        <label>E-mail<input id="authEmail" type="email" required autocomplete="email"></label>
+        <label>Senha<input id="authPassword" type="password" required minlength="6" autocomplete="current-password"></label>
+        <button id="loginBtn" type="submit" class="primary">Entrar</button>
+        <button id="signupBtn" type="button" class="secondary">Criar conta</button>
+        <div id="authMessage" class="message"></div>
+      </form>
+    </div>
+  </div>
+
+  <div id="app" class="app hidden">
+    <aside class="sidebar">
+      <div class="logo"><span>PT</span><strong>Planilha</strong></div>
+      <nav>
+        <button class="nav-btn active" data-section="dashboard">Dashboard</button>
+        <button class="nav-btn" data-section="works">Trabalhos</button>
+        <button class="nav-btn" data-section="expenses">Despesas</button>
+      </nav>
+      <div class="sidebar-bottom">
+        <small id="userEmail"></small>
+        <button id="logoutBtn" class="logout">Sair</button>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div><h2 id="pageTitle">Dashboard</h2><p>Controle seus ganhos e despesas.</p></div>
+        <div class="week-controls"><button id="prevWeek">‹</button><input id="weekPicker" type="date"><button id="nextWeek">›</button></div>
+      </header>
+
+      <section id="dashboardSection" class="section">
+        <div class="cards">
+          <article class="card"><span>Faturamento bruto</span><strong id="grossValue">R$ 0,00</strong></article>
+          <article class="card"><span>Despesas</span><strong id="expenseValue">R$ 0,00</strong></article>
+          <article class="card"><span>Lucro líquido</span><strong id="netValue">R$ 0,00</strong></article>
+          <article class="card"><span>Trabalhos</span><strong id="workCount">0</strong></article>
+          <article class="card"><span>Unidades</span><strong id="unitCount">0</strong></article>
+        </div>
+        <div class="panel"><div class="panel-head"><h3>Resumo da semana</h3></div><div id="dailyBreakdown" class="daily-grid"></div></div>
+        <div class="panel"><div class="panel-head"><h3>Lançamentos recentes</h3></div><div id="recentList" class="table-wrap"></div></div>
+      </section>
+
+      <section id="worksSection" class="section hidden">
+        <div class="panel">
+          <div class="panel-head"><h3>Registrar trabalho</h3></div>
+          <form id="workForm" class="form-grid">
+            <label>Data<input id="workDate" type="date" required></label>
+            <label>Trabalho<input id="workName" type="text" placeholder="Ex.: Instalação" required></label>
+            <label>Quantidade<input id="workQty" type="number" min="1" value="1" required></label>
+            <label>Valor por unidade<input id="workUnit" type="number" min="0" step="0.01" value="0" required></label>
+            <button class="primary" type="submit">Adicionar trabalho</button>
+          </form>
+        </div>
+        <div class="panel"><div class="panel-head"><h3>Trabalhos registrados</h3><input id="workSearch" class="search" placeholder="Pesquisar..."></div><div id="worksTable" class="table-wrap"></div></div>
+      </section>
+
+      <section id="expensesSection" class="section hidden">
+        <div class="panel">
+          <div class="panel-head"><h3>Registrar despesa</h3></div>
+          <form id="expenseForm" class="form-grid">
+            <label>Data<input id="expenseDate" type="date" required></label>
+            <label>Descrição<input id="expenseName" type="text" placeholder="Ex.: Combustível" required></label>
+            <label>Categoria<select id="expenseCategory"><option>Alimentação</option><option>Transporte</option><option>Material</option><option>Contas</option><option>Outros</option></select></label>
+            <label>Valor<input id="expenseValueInput" type="number" min="0" step="0.01" value="0" required></label>
+            <button class="primary" type="submit">Adicionar despesa</button>
+          </form>
+        </div>
+        <div class="panel"><div class="panel-head"><h3>Despesas registradas</h3><input id="expenseSearch" class="search" placeholder="Pesquisar..."></div><div id="expensesTable" class="table-wrap"></div></div>
+      </section>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="script.js"></script>
+</body>
+</html>
